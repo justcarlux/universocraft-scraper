@@ -1,0 +1,1 @@
+export type TimeStringType = "d" | "h" | "m" | "s";
