@@ -44,7 +44,11 @@ Module for gathering player statistics from the hispanic Minecraft server Univer
                 playedTime: 3000
             },
             theBridge: {
-                ...
+                total: [TheBridgeStatistics],
+                solo: [TheBridgeStatistics],
+                doubles: [TheBridgeStatistics],
+                threes: [TheBridgeStatistics],
+                legacy: [TheBridgeStatistics]
             },
             destroyTheNexus: DestroyTheNexusStatistics {
                 ...
