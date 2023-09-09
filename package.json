@@ -1,6 +1,6 @@
 {
     "name": "universocraft-scraper",
-    "version": "1.0.0",
+    "version": "1.0.1",
     "description": "Get any player's statistics from the hispanic Minecraft server UniversoCraft with with good and safe typings, using web scraping.",
     "main": "lib/index.js",
     "types": "lib/index.d.ts",
@@ -22,7 +22,12 @@
         "build": "tsc",
         "test": "jest --config jestconfig.json"
     },
-    "keywords": ["universocraft", "api", "statistics", "scraper"],
+    "keywords": [
+        "universocraft",
+        "api",
+        "statistics",
+        "scraper"
+    ],
     "author": "justcarlux",
     "license": "ISC",
     "bugs": {
