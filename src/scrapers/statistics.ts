@@ -60,26 +60,26 @@ export function getPlayerStatistics(serialized: string[]): Statistics {
     });
     
     const raw = new Map<string, any>();
-    let previous = "";
     let currentGamemodeKey = "";
     let currentStatKey = "";
     indexes.forEach((value, index) => {
         const isMinigameTitle = index % 2 === 0;
         if (isMinigameTitle) {
+            // if (!minigames[serialized[value + 1] as keyof typeof minigames]) {
+            //     console.log(`unknown key: ${serialized[value + 1]}`);
+            // }
             currentGamemodeKey = minigames[serialized[value + 1] as keyof typeof minigames];
             return;
         }
         while (true) {
             value++;
             const data = serialized[value];
-            previous = data;
             if (
                 // finish when it finds 3 consecutive div close tags
                 serialized[value - 2].includes("</div>") &&
                 serialized[value - 1].includes("</div>") &&
                 data.includes("</div>")
             ) {
-                previous = "";
                 break;
             }
 

@@ -113,11 +113,6 @@ Module for gathering player statistics from the hispanic Minecraft server Univer
 # `queryUser`
 ```ts
 queryUser(username: string): Promise<UserQuery | null>
-
-interface UserQuery {
-    player: Player,
-    statistics: Statistics
-}
 ```
 Fetch statistics and player information from UniversoCraft given an username. Returns a `Promise` with an `UserQuery` object with the player information, or null if it was not found.
 
