@@ -1,6 +1,6 @@
 {
     "name": "universocraft-scraper",
-    "version": "1.0.1",
+    "version": "1.0.2",
     "description": "Get any player's statistics from the hispanic Minecraft server UniversoCraft with with good and safe typings, using web scraping.",
     "main": "lib/index.js",
     "types": "lib/index.d.ts",
