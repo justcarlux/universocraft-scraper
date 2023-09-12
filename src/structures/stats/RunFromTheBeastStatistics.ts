@@ -3,7 +3,7 @@ interface IRunFromTheBeastStatistics {
     winsAsRunner: number,
     winsAsBeast: number,
     killsAsRunner: number,
-    killsAsBeast: number,
+    killsAsBeast: number
 }
 
 export class RunFromTheBeastStatistics implements IRunFromTheBeastStatistics {

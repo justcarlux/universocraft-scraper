@@ -8,7 +8,7 @@ interface IDestroyTheNexusStatistics {
     placedBlocks: number,
     brokenBlocks: number,
     brokenOres: number,
-    brokenLogs: number,
+    brokenLogs: number
 }
 
 export class DestroyTheNexusStatistics implements IDestroyTheNexusStatistics {
@@ -29,7 +29,7 @@ export class DestroyTheNexusStatistics implements IDestroyTheNexusStatistics {
         this.killsWithBow = data?.killsWithBow ?? 0;
         this.deaths = data?.deaths ?? 0;
         this.nexusDamage = data?.nexusDamage ?? 0;
-        this.nexusDestructions = data?.nexusDamage ?? 0;
+        this.nexusDestructions = data?.nexusDestructions ?? 0;
         this.placedBlocks = data?.placedBlocks ?? 0;
         this.brokenBlocks = data?.brokenBlocks ?? 0;
         this.brokenOres = data?.brokenOres ?? 0;

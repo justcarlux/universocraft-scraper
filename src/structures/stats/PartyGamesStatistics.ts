@@ -2,7 +2,7 @@ interface IPartyGamesStatistics {
     wins: number,
     kills: number,
     deaths: number,
-    playedGames: number,
+    playedGames: number
 }
 
 export class PartyGamesStatistics implements IPartyGamesStatistics {

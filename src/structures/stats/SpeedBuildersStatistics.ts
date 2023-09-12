@@ -1,7 +1,7 @@
 interface ISpeedBuildersStatistics {
     wins: number,
     losses: number,
-    perfectBuilds: number,
+    perfectBuilds: number
 }
 
 export class SpeedBuildersStatistics implements ISpeedBuildersStatistics {

@@ -18,7 +18,11 @@ import { SpeedBuildersStatistics } from "../structures/stats/SpeedBuildersStatis
 import { TNTRunStatistics } from "../structures/stats/TNTRunStatistics";
 import { TNTTagStatistics } from "../structures/stats/TNTTagStatistics";
 import { TeamSkyWarsStatistics } from "../structures/stats/TeamSkyWarsStatistics";
-import { TheBridgeStatistics } from "../structures/stats/TheBridgeStatistics";
+import { TheBridgeTotalStatistics } from "../structures/stats/TheBridgeTotalStatistics";
+import { TheBridgeSoloStatistics } from "../structures/stats/TheBridgeSoloStatistics";
+import { TheBridgeDoublesStatistics } from "../structures/stats/TheBridgeDoublesStatistics";
+import { TheBridgeThreesStatistics } from "../structures/stats/TheBridgeThreesStatistics";
+import { TheBridgeLegacyStatistics } from "../structures/stats/TheBridgeLegacyStatistics";
 import { UHCStatistics } from "../structures/stats/UHCStatistics";
 import { Statistics } from "../structures/main/Statistics";
 import { TimeStringType } from "../structures/misc/TimeStringType";
@@ -112,11 +116,11 @@ export function getPlayerStatistics(serialized: string[]): Statistics {
     return {
         skyBlock: new SkyBlockStatistics(raw.get("skyBlock")),
         theBridge: {
-            total: new TheBridgeStatistics(raw.get("theBridgeTotal")),
-            solo: new TheBridgeStatistics(raw.get("theBridgeSolo")),
-            doubles: new TheBridgeStatistics(raw.get("theBridgeDoubles")),
-            threes: new TheBridgeStatistics(raw.get("theBridgeThrees")),
-            legacy: new TheBridgeStatistics(raw.get("theBridgeLegacy"))
+            total: new TheBridgeTotalStatistics(raw.get("theBridgeTotal")),
+            solo: new TheBridgeSoloStatistics(raw.get("theBridgeSolo")),
+            doubles: new TheBridgeDoublesStatistics(raw.get("theBridgeDoubles")),
+            threes: new TheBridgeThreesStatistics(raw.get("theBridgeThrees")),
+            legacy: new TheBridgeLegacyStatistics(raw.get("theBridgeLegacy"))
         },
         destroyTheNexus: new DestroyTheNexusStatistics(raw.get("destroyTheNexus")),
         skyWars: new SkyWarsStatistics(raw.get("skyWars")),

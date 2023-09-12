@@ -3,7 +3,7 @@ interface ICaptureTheWoolStatistics {
     kills: number,
     killsWithBow: number,
     maximumBowDeathDistance: number,
-    placedWools: number,
+    placedWools: number
 }
 
 export class CaptureTheWoolStatistics implements ICaptureTheWoolStatistics {

@@ -5,7 +5,7 @@ interface ITeamSkyWarsStatistics {
     placedBlocks: number,
     brokenBlocks: number,
     launchedProjectiles: number,
-    landedProjectiles: number,
+    landedProjectiles: number
 }
 
 export class TeamSkyWarsStatistics implements ITeamSkyWarsStatistics {

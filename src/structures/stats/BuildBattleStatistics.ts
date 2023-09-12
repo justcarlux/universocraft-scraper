@@ -1,7 +1,7 @@
 interface IBuildBattleStatistics {
     wins: number,
     playedGames: number,
-    score: number,
+    score: number
 }
 
 export class BuildBattleStatistics implements IBuildBattleStatistics {

@@ -5,7 +5,7 @@ interface ILuckyWarsStatistics {
     placedBlocks: number,
     brokenBlocks: number,
     launchedProjectiles: number,
-    landedProjectiles: number,
+    landedProjectiles: number
 }
 
 export class LuckyWarsStatistics implements ILuckyWarsStatistics {

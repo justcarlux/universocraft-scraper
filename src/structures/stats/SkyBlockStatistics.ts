@@ -22,7 +22,7 @@ export class SkyBlockStatistics implements ISkyBlockStatistics {
         this.kills = data?.kills ?? 0;
         this.deaths = data?.deaths ?? 0;
         this.unicoins = data?.unicoins ?? 0;
-        this.bankAccount = data?.unicoins ?? 0;
+        this.bankAccount = data?.bankAccount ?? 0;
         this.gems = data?.gems ?? 0;
         this.playedTime = data?.playedTime ?? 0;
     }

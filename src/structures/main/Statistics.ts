@@ -16,18 +16,22 @@ import { SpeedBuildersStatistics } from "../stats/SpeedBuildersStatistics";
 import { TNTRunStatistics } from "../stats/TNTRunStatistics";
 import { TNTTagStatistics } from "../stats/TNTTagStatistics";
 import { TeamSkyWarsStatistics } from "../stats/TeamSkyWarsStatistics";
-import { TheBridgeStatistics } from "../stats/TheBridgeStatistics";
+import { TheBridgeTotalStatistics } from "../stats/TheBridgeTotalStatistics";
+import { TheBridgeSoloStatistics } from "../stats/TheBridgeSoloStatistics";
+import { TheBridgeDoublesStatistics } from "../stats/TheBridgeDoublesStatistics";
+import { TheBridgeThreesStatistics } from "../stats/TheBridgeThreesStatistics";
+import { TheBridgeLegacyStatistics } from "../stats/TheBridgeLegacyStatistics";
 import { UHCStatistics } from "../stats/UHCStatistics";
 
 
 export interface Statistics {
     skyBlock: SkyBlockStatistics,
     theBridge: {
-        total: TheBridgeStatistics,
-        solo: TheBridgeStatistics,
-        doubles: TheBridgeStatistics,
-        threes: TheBridgeStatistics,
-        legacy: TheBridgeStatistics
+        total: TheBridgeTotalStatistics,
+        solo: TheBridgeSoloStatistics,
+        doubles: TheBridgeDoublesStatistics,
+        threes: TheBridgeThreesStatistics,
+        legacy: TheBridgeLegacyStatistics
     },
     destroyTheNexus: DestroyTheNexusStatistics,
     skyWars: SkyWarsStatistics,

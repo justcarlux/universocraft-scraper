@@ -1,7 +1,7 @@
 interface IHungerGamesStatistics {
     wins: number,
     kills: number,
-    deaths: number,
+    deaths: number
 }
 
 export class HungerGamesStatistics implements IHungerGamesStatistics {

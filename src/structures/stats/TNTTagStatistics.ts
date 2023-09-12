@@ -1,7 +1,7 @@
 interface ITNTTagStatistics {
     wins: number,
     kills: number,
-    unicoins: number,
+    unicoins: number
 }
 
 export class TNTTagStatistics implements ITNTTagStatistics {

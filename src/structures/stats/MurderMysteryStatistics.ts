@@ -2,7 +2,7 @@ interface IMurderMysteryStatistics {
     wins: number,
     losses: number,
     kills: number,
-    deaths: number,
+    deaths: number
 }
 
 export class MurderMysteryStatistics implements IMurderMysteryStatistics {

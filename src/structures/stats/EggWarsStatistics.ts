@@ -6,7 +6,7 @@ interface IEggWarsStatistics {
     placedBlocks: number,
     brokenBlocks: number,
     launchedProjectiles: number,
-    landedProjectiles: number,
+    landedProjectiles: number
 }
 
 export class EggWarsStatistics implements IEggWarsStatistics {

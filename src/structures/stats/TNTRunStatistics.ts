@@ -1,6 +1,6 @@
 interface ITNTRunStatistics {
     wins: number,
-    playedGames: number,
+    playedGames: number
 }
 
 export class TNTRunStatistics implements ITNTRunStatistics {

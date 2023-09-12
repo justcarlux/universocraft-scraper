@@ -3,7 +3,7 @@ interface ISkyPitStatistics {
     unicoins: number,
     assistances: number,
     kills: number,
-    deaths: number,
+    deaths: number
 }
 
 export class SkyPitStatistics implements ISkyPitStatistics {

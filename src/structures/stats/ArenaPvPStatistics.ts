@@ -1,7 +1,7 @@
 interface IArenaPvPStatistics {
     wins: number,
     kills: number,
-    losses: number,
+    losses: number
 }
 
 export class ArenaPvPStatistics implements IArenaPvPStatistics {

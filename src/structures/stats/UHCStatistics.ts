@@ -3,7 +3,7 @@ interface IUHCStatistics {
     losses: number,
     playedGames: number,
     kills: number,
-    deaths: number,
+    deaths: number
 }
 
 export class UHCStatistics implements IUHCStatistics {
