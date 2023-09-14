@@ -126,7 +126,7 @@ export function getPlayerStatistics(serialized: string[]): Statistics {
         skyWars: new SkyWarsStatistics(raw.get("skyWars")),
         luckyWars: new LuckyWarsStatistics(raw.get("luckyWars")),
         eggWars: new EggWarsStatistics(raw.get("eggWars")),
-        bedwars: new BedWarsStatistics(raw.get("bedWars")),
+        bedWars: new BedWarsStatistics(raw.get("bedWars")),
         teamSkywars: new TeamSkyWarsStatistics(raw.get("teamSkywars")),
         speedBuilders: new SpeedBuildersStatistics(raw.get("speedBuilders")),
         tntRun: new TNTRunStatistics(raw.get("tntRun")),

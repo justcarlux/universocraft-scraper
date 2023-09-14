@@ -37,7 +37,7 @@ export interface Statistics {
     skyWars: SkyWarsStatistics,
     luckyWars: LuckyWarsStatistics,
     eggWars: EggWarsStatistics,
-    bedwars: BedWarsStatistics,
+    bedWars: BedWarsStatistics,
     teamSkywars: TeamSkyWarsStatistics,
     speedBuilders: SpeedBuildersStatistics,
     tntRun: TNTRunStatistics,
