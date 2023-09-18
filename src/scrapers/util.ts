@@ -28,9 +28,6 @@ export function appropiateStatParse(data: string) {
     }
 }
 
-const string = "06:15 p.m. del 18-Sep-2023 (GMT+2)";
-// 12:15 pm => current
-
 function getHoursAndMinutes(text: string) {
     const [hour, type] = text.split(/ +/g);
     const split = hour.split(":");
@@ -72,7 +69,6 @@ export function parseLastSeenTimeString(text: string) {
     const dateStringSplit = dateString.trim().split(/ +/g);
     const currentGMT = new Date().getTimezoneOffset() / 60;
     const suppliedGMT = parseInt(dateStringSplit?.at(1)?.match(/(\+|-)\d+/g)?.at(0) ?? "0");
-
     const { day, month, year } = getDayMonthAndYear(dateStringSplit[0].trim());
 
     const date = new Date(year, month, day, hours, minutes);
