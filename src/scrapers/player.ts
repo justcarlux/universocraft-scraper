@@ -3,6 +3,7 @@ import { Player } from "../structures/main/Player";
 import { Rank, availableRanks } from "../structures/misc/Rank";
 import { Tag } from "../structures/misc/TagInfo";
 import { RGBColorTuple } from "../structures/misc/RGBColorTuple";
+import { parseLastSeenTimeString } from "./util";
 
 export function getPlayerInfo(serialized: string[]): Player {
 
@@ -13,6 +14,13 @@ export function getPlayerInfo(serialized: string[]): Player {
     const head = serialized.at(
         serialized.findIndex(e => e.includes(`<div class="player-image-border">`)) + 1
     )?.match(/https:\/\/.+"\s/g)?.at(0)?.slice(0, -2) ?? "";
+
+    const lastSeen = (() => {
+        const text = serialized.at(
+            serialized.findIndex(e => e.includes(`Última conexión`)) + 4
+        ) ?? "";
+        return parseLastSeenTimeString(text);
+    })();
 
     const skin = ((): string => {
         try {
@@ -51,6 +59,6 @@ export function getPlayerInfo(serialized: string[]): Player {
         })
     })();
 
-    return { username, head, skin, ranks, tags }
+    return { username, head, skin, ranks, tags, lastSeen }
 
 }

@@ -1,6 +1,6 @@
 # 🌎 universocraft-scraper
 
-Module for gathering player statistics from the hispanic Minecraft server UniversoCraft with good and safe typings, using web scraping.
+No-dependency module for gathering player statistics from the hispanic Minecraft server UniversoCraft with good and safe typings, using web scraping.
 
 # Usage
 
@@ -124,7 +124,8 @@ interface Player {
     head: string, // Link of the player's head used in the statistics page, belongs to the Mineskin API
     skin: string, // Player skin texture link, grabbed from the head link
     ranks: Rank[], // List of player ranks
-    tags: Tag[] // List of player tags
+    tags: Tag[], // List of player tags
+    lastSeen: Date | null // Date the player was last connected to the server
 }
 ```
 
@@ -160,3 +161,7 @@ interface Statistics {
     captureTheWool: CaptureTheWoolStatistics
 }
 ```
+
+Some notes:
+- Every single statistic is parsed as a number automatically. `playedTime` properties are properly converted from the page's time string to milliseconds.
+- It's not really clear what's the meaning of the number found in `yt` ranks. Probably varies depending on the YouTuber's popularity.

@@ -1,5 +1,6 @@
 import minigames from "../resources/minigames.json";
 import statNames from "../resources/stat-names.json";
+import { Statistics } from "../structures/main/Statistics";
 import { ArenaPvPStatistics } from "../structures/stats/ArenaPvPStatistics";
 import { BedWarsStatistics } from "../structures/stats/BedWarsStatistics";
 import { BuildBattleStatistics } from "../structures/stats/BuildBattleStatistics";
@@ -18,43 +19,14 @@ import { SpeedBuildersStatistics } from "../structures/stats/SpeedBuildersStatis
 import { TNTRunStatistics } from "../structures/stats/TNTRunStatistics";
 import { TNTTagStatistics } from "../structures/stats/TNTTagStatistics";
 import { TeamSkyWarsStatistics } from "../structures/stats/TeamSkyWarsStatistics";
-import { TheBridgeTotalStatistics } from "../structures/stats/TheBridgeTotalStatistics";
-import { TheBridgeSoloStatistics } from "../structures/stats/TheBridgeSoloStatistics";
 import { TheBridgeDoublesStatistics } from "../structures/stats/TheBridgeDoublesStatistics";
-import { TheBridgeThreesStatistics } from "../structures/stats/TheBridgeThreesStatistics";
 import { TheBridgeLegacyStatistics } from "../structures/stats/TheBridgeLegacyStatistics";
+import { TheBridgeSoloStatistics } from "../structures/stats/TheBridgeSoloStatistics";
+import { TheBridgeThreesStatistics } from "../structures/stats/TheBridgeThreesStatistics";
+import { TheBridgeTotalStatistics } from "../structures/stats/TheBridgeTotalStatistics";
 import { UHCStatistics } from "../structures/stats/UHCStatistics";
-import { Statistics } from "../structures/main/Statistics";
-import { TimeStringType } from "../structures/misc/TimeStringType";
 import { filterIndexes } from "../utils/array-related";
-
-export function appropiateParse(data: string) {
-    if (
-        data.includes("d") ||
-        data.includes("h") ||
-        data.includes("m") ||
-        data.includes("s")
-    ) {
-        return data.split(/ +/g)
-        .map(e => {
-            const number = parseInt(e.match(/[0-9]+/g)?.at(0) ?? "0");
-            const type = (e.match(/[a-zA-Z]/g)?.at(0) ?? "s") as TimeStringType;
-            switch (type) {
-                case "s": // seconds
-                    return number * 1000;
-                case "m": // minutes
-                    return number * 1000 * 60;
-                case "h": // hours
-                    return number * 1000 * 60 * 60;
-                default: // days
-                    return number * 1000 * 60 * 60 * 24;
-            }
-        })
-        .reduce((accumulated, current) => accumulated + current, 0)
-    } else {
-        return parseInt(data);
-    }
-}
+import { appropiateStatParse } from "./util";
 
 export function getPlayerStatistics(serialized: string[]): Statistics {
     
@@ -69,9 +41,6 @@ export function getPlayerStatistics(serialized: string[]): Statistics {
     indexes.forEach((value, index) => {
         const isMinigameTitle = index % 2 === 0;
         if (isMinigameTitle) {
-            // if (!minigames[serialized[value + 1] as keyof typeof minigames]) {
-            //     console.log(`unknown key: ${serialized[value + 1]}`);
-            // }
             currentGamemodeKey = minigames[serialized[value + 1] as keyof typeof minigames];
             return;
         }
@@ -104,7 +73,7 @@ export function getPlayerStatistics(serialized: string[]): Statistics {
             if (currentStatKey) {
                 raw.set(currentGamemodeKey, {
                     ...(raw.get(currentGamemodeKey) || {}),
-                    [currentStatKey]: appropiateParse(data)
+                    [currentStatKey]: appropiateStatParse(data)
                 });
                 currentStatKey = "";
             } else {

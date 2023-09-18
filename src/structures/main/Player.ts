@@ -11,5 +11,7 @@ export interface Player {
     /** List of player ranks */
     ranks: Rank[],
     /** List of player tags */
-    tags: Tag[]
+    tags: Tag[],
+    /** Date the player was last connected to the server */
+    lastSeen: Date | null
 }
