@@ -31,7 +31,8 @@ No-dependency module for gathering player statistics from the hispanic Minecraft
             head: 'https://api.mineskin.org/render/head?url=http://textures.minecraft.net/texture/387314a97b1732d7eb2f8e1b14798df1ae38b6878620e9c15647042443bafdf7',
             skin: 'http://textures.minecraft.net/texture/387314a97b1732d7eb2f8e1b14798df1ae38b6878620e9c15647042443bafdf7',
             ranks: ['usuar', 'premium'],
-            tags: []
+            tags: [],
+            lastSeen: 2023-09-18T17:06:00.000Z
         },
         statistics: {
             skyBlock: SkyBlockStatistics {
