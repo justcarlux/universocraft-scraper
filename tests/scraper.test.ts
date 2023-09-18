@@ -21,13 +21,33 @@ test("query user", async () => {
     const info = await queryUser("JustCarluX");
     const keys = Object.keys(info ?? {});
     saveInfo(info);
-    return expect(keys.includes("player") && keys.includes("statistics")).toBeTruthy();
+    return expect(
+        keys.includes("player") &&
+        keys.includes("statistics")
+    ).toBeTruthy();
 }, 15_000);
 
 test("query user with tags", async () => {
     const info = await queryUser("wMal");
+    const keys = Object.keys(info ?? {});
     saveInfo(info);
-    return expect(info?.player.tags.length).toBeTruthy();
+    return expect(
+        keys.includes("player") &&
+        keys.includes("statistics") &&
+        info?.player.tags.length
+    ).toBeTruthy();
+}, 15_000);
+
+test("query an admin w/ no last seen date", async () => {
+    const info = await queryUser("Tauchet");
+    const keys = Object.keys(info ?? {});
+    saveInfo(info);
+    return expect(
+        keys.includes("player") &&
+        keys.includes("statistics") &&
+        info?.player.ranks.includes("admin") &&
+        !info?.player.lastSeen
+    ).toBeTruthy();
 }, 15_000);
 
 test("query non-existing user", async () => {
