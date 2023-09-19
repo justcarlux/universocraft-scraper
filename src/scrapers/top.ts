@@ -2,7 +2,7 @@ import { TopEntry } from "../structures/main/TopEntry";
 import { filterIndexes } from "../utils/array-related";
 import { baseURL } from "../utils/constants";
 
-export function getTopEntriesInfo(serialized: string[]): TopEntry[] {
+export function getTopEntries(serialized: string[]): TopEntry[] {
     const indexes = filterIndexes(serialized, (e) => {
         return e.includes(`<div class="player"`) || e.includes(`<div class="player `);
     });

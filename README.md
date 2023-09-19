@@ -138,7 +138,7 @@ Fetch statistics and player information from UniversoCraft given a Minecraft pro
 - uuid (`string`): Minecraft UUID of the player.
 - addUuidDashes (optional, `boolean`): Manually add the dashes needed for the UUID to work.
 
-Both functions return a `Promise` with an `UserQuery` object with the player information, or null if it was not found.
+Both functions return a `Promise` with an `UserQuery` object with the player information, or null if it was not found. Throws an error when the page doesn't return any data or or when the `fetch` fails.
 
 - UserQuery.player (`Player`): Basic information of the player.
 
@@ -194,19 +194,20 @@ Some notes:
 
 # `fetchTop`
 ```ts
-fetchTop(options: FetchTopOptions): Promise<TopEntry[]>
+fetchTop(route: string, page?: number): Promise<TopEntry[]>
 ```
 Fetch top entries given a route from UniversoCraft.
-- options.route (`string`): Page route where to fetch top entries from. It's recommended/intented to use the exported constant `TopRoutes` to find a route to fetch from. Either way, you can pass one manually.
+- route (`string`): Page route where to fetch top entries from. It's recommended/intented to use the exported constant `TopRoutes` to find a route to fetch from. Either way, you can pass one manually.
+- page (optional, `number`): Top page number, must be between 1 and 20. Defaults to **1**.
+
 ```ts
 // Examples:
-fetchTop({ route: TopRoutes.BedWars.Wins })
-fetchTop({ route: TopRoutes.SkyWars.Kills })
-fetchTop({ route: "uhc/kills" }) */
+fetchTop(TopRoutes.BedWars.Wins)
+fetchTop(TopRoutes.SkyWars.Kills)
+fetchTop("uhc/kills", 2)
 ```
-- options.page (optional, `number`): Top page number. Defaults to **1**.
 
-Returns a `Promise` with an array of the `TopEntry` object with the information, or null if it was not found.
+Returns a `Promise` with an array of the `TopEntry` object with the information, or null if it was not found. Throws an error if the `page` argument is invalid, when the page doesn't return any data or when the `fetch` fails.
 
 - TopEntry.position (`number`): Player top position relative to the page index.
 - TopEntry.username (`string`): Player username.

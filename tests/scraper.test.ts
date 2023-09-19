@@ -4,7 +4,6 @@ import path from "path";
 import { UserQuery } from "../src/structures/main/UserQuery";
 import { TopEntry } from "../src/structures/main/TopEntry";
 
-const delay = 1_500;
 
 try {
     if (!existsSync(path.join(__dirname, "data"))) {
@@ -20,14 +19,15 @@ export function saveInfo(info: UserQuery | TopEntry[] | null, filename: string) 
     )
 }
 
-async function wait(ms: number) {
+// to avoid rate limiting
+async function wait() {
     return await new Promise(resolve => {
-        setTimeout(resolve, ms);
+        setTimeout(resolve, 2_000);
     });
 }
 
 test("query user (myself)", async () => {
-    await wait(delay); // to avoid rate limiting
+    await wait();
     const info = await queryUserByUsername("JustCarluX");
     const keys = Object.keys(info ?? {});
     saveInfo(info, "JustCarluX-1.json");
@@ -38,7 +38,7 @@ test("query user (myself)", async () => {
 }, 15_000);
 
 test("query user (myself, uuid w/ dashes)", async () => {
-    await wait(delay); // to avoid rate limiting
+    await wait();
     const info = await queryUserByUuid("460e9c28-f52f-4548-91aa-c113059b98a2");
     const keys = Object.keys(info ?? {});
     saveInfo(info, "JustCarluX-2.json");
@@ -50,7 +50,7 @@ test("query user (myself, uuid w/ dashes)", async () => {
 
 
 test("query user (myself, uuid without dashes)", async () => {
-    await wait(delay); // to avoid rate limiting
+    await wait();
     const info = await queryUserByUuid("460e9c28f52f454891aac113059b98a2", true);
     const keys = Object.keys(info ?? {});
     saveInfo(info, "JustCarluX-3.json");
@@ -62,7 +62,7 @@ test("query user (myself, uuid without dashes)", async () => {
 
 
 test("query user with tags", async () => {
-    await wait(delay);
+    await wait();
     const info = await queryUserByUsername("wMal");
     const keys = Object.keys(info ?? {});
     saveInfo(info, "wMal.json");
@@ -74,7 +74,7 @@ test("query user with tags", async () => {
 }, 15_000);
 
 test("query user with hide and seek and pinturillo statistics", async () => {
-    await wait(delay);
+    await wait();
     const info = await queryUserByUsername("JeanJxmxn");
     const keys = Object.keys(info ?? {});
     saveInfo(info, "JeanJxmxn.json");
@@ -87,7 +87,7 @@ test("query user with hide and seek and pinturillo statistics", async () => {
 }, 15_000);
 
 test("query an admin w/ no last seen date", async () => {
-    await wait(delay);
+    await wait();
     const info = await queryUserByUsername("Tauchet");
     const keys = Object.keys(info ?? {});
     saveInfo(info, "Tauchet.json");
@@ -100,26 +100,21 @@ test("query an admin w/ no last seen date", async () => {
 }, 15_000);
 
 test("query non-existing user", async () => {
-    await wait(delay);
+    await wait();
     const info = await queryUserByUsername("_");
     return expect(info).toBeNull();
 }, 15_000);
 
 test("get bedwars top (by wins) without pagination", async () => {
-    await wait(delay);
-    const info = await fetchTop({
-        route: TopRoutes.BedWars.Wins
-    });
+    await wait();
+    const info = await fetchTop(TopRoutes.BedWars.Wins);
     saveInfo(info, "BedwarsWinsTop-Page1.json");
     return expect(info.length).toBeTruthy();
 }, 15_000);
 
 test("get bedwars top (by wins) with pagination", async () => {
-    await wait(delay);
-    const info = await fetchTop({
-        route: TopRoutes.BedWars.Wins,
-        page: 5
-    });
+    await wait();
+    const info = await fetchTop(TopRoutes.BedWars.Wins, 5);
     saveInfo(info, "BedwarsWinsTop-Page5.json");
     return expect(info.length).toBeTruthy();
 }, 15_000);

@@ -1,35 +1,29 @@
-import { getTopEntriesInfo } from "../scrapers/top";
+import { getTopEntries } from "../scrapers/top";
 import { TopEntry } from "../structures/main/TopEntry";
 import { baseURL } from "../utils/constants";
 import { splitData } from "../utils/split-data";
 
-interface FetchTopOptions {
-    /** Page route where to fetch top entries from.
-     * It's recommended/intented to use the exported constant `TopRoutes` to find a route to fetch from.
-     * Either way, you can pass one manually 
-     * @example fetchTop({ route: TopRoutes.BedWars.Wins })
-     * @example fetchTop({ route: TopRoutes.SkyWars.Kills })
-     * @example fetchTop({ route: "uhc/kills" }) */
-    route: string,
-    /** Top page number. Defaults to **1** */
-    page?: number
-}
-
 /**
  * Fetch top entries given a route from UniversoCraft. Returns a `Promise` with an array of the `TopEntry` object with the information, or null if it was not found.
- * @param { GetTopEntriesOptions } options Options for the function
- * @returns { Promise<TopQuery | null> } The top information on succeed. Throws an error if something happens while getting the information
+ * @param { string } route Page route where to fetch top entries from.
+ * It's recommended/intented to use the exported constant `TopRoutes` to find a route to fetch from.
+ * Either way, you can pass one manually 
+ * @param { number } page Top page number, must be between 1 and 20. Defaults to **1**
+ * @example fetchTop(TopRoutes.BedWars.Wins)
+ * @example fetchTop(TopRoutes.SkyWars.Kills)
+ * @example fetchTop("uhc/kills", 2)
+ * @returns { Promise<TopQuery | null> } The top information on succeed. Throws an error if the `page` argument is invalid, when the page doesn't return any data or when the `fetch` fails
 */
-export async function fetchTop(options: FetchTopOptions): Promise<TopEntry[]> {
+export async function fetchTop(route: string, page?: number): Promise<TopEntry[]> {
 
     if (
-        (options.page ?? 1) < 1 || (options.page ?? 1) > 20
+        (page ?? 1) < 1 || (page ?? 1) > 20
     ) {
         throw new Error("Page must be a number between 1 and 20.")
     }
 
     const data = await (
-        await fetch(`${baseURL}/tops/${options.route}/${options.page ?? 1}`)
+        await fetch(`${baseURL}/tops/${route}/${page ?? 1}`)
     ).text();
     
     if (!data.trim()) {
@@ -43,6 +37,6 @@ export async function fetchTop(options: FetchTopOptions): Promise<TopEntry[]> {
     }
 
     const serialized = splitData(data);
-    return getTopEntriesInfo(serialized);
+    return getTopEntries(serialized);
 
 }

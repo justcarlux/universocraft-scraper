@@ -7,7 +7,7 @@ import { splitData } from "../utils/split-data";
 /**
  * Fetch statistics and player information from UniversoCraft given an username. Returns a `Promise` with an `UserQuery` object with the player information, or null if it was not found.
  * @param { string } username Username of the player
- * @returns { Promise<UserQuery | null> } The information on succeed, or null if the player was not found. Throws an error if something happens while getting the information
+ * @returns { Promise<UserQuery | null> } The information on succeed, or null if the player was not found. Throws an error when the page doesn't return any data or or when the `fetch` fails
 */
 export async function queryUserByUsername(username: string): Promise<UserQuery | null> {
     const data = await (
@@ -21,7 +21,7 @@ export async function queryUserByUsername(username: string): Promise<UserQuery |
  * Fetch statistics and player information from UniversoCraft given a Minecraft profile UUID.. Returns a `Promise` with an `UserQuery` object with the player information, or null if it was not found.
  * @param { string } uuid Minecraft UUID of the player
  * @param { boolean } addUuidDashes Manually add the dashes needed for the UUID to work
- * @returns { Promise<UserQuery | null> } The information on succeed, or null if the player was not found. Throws an error if something happens while getting the information
+ * @returns { Promise<UserQuery | null> } The information on succeed, or null if the player was not found. Throws an error when the page doesn't return any data or or when the `fetch` fails
 */
 export async function queryUserByUuid(uuid: string, addUuidDashes?: boolean): Promise<UserQuery | null> {
     const data = await (
