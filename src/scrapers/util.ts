@@ -1,5 +1,3 @@
-import { TimeStringType } from "../structures/misc/TimeStringType";
-
 export function appropiateStatParse(data: string) {
     if (
         data.includes("d") ||
@@ -10,7 +8,7 @@ export function appropiateStatParse(data: string) {
         return data.split(/ +/g)
         .map(e => {
             const number = parseInt(e.match(/[0-9]+/g)?.at(0) ?? "0");
-            const type = (e.match(/[a-zA-Z]/g)?.at(0) ?? "s") as TimeStringType;
+            const type = (e.match(/[a-zA-Z]/g)?.at(0) ?? "s") as ("d" | "h" | "m" | "s");
             switch (type) {
                 case "s": // seconds
                     return number * 1000;
@@ -24,7 +22,7 @@ export function appropiateStatParse(data: string) {
         })
         .reduce((accumulated, current) => accumulated + current, 0)
     } else {
-        return parseInt(data);
+        return parseFloat(data);
     }
 }
 

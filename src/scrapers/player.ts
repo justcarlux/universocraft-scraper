@@ -1,7 +1,7 @@
 import { filterIndexes } from "../utils/array-related";
 import { Player } from "../structures/main/Player";
 import { Rank, availableRanks } from "../structures/misc/Rank";
-import { Tag } from "../structures/misc/TagInfo";
+import { Tag } from "../structures/misc/Tag";
 import { RGBColorTuple } from "../structures/misc/RGBColorTuple";
 import { parseLastSeenTimeString } from "./util";
 
@@ -41,7 +41,7 @@ export function getPlayerInfo(serialized: string[]): Player {
             startIndex,
             serialized.findIndex((e, index) => e.includes("</div>") && index > startIndex)
         );
-        const indexes = filterIndexes(data, (e: string) => {
+        const indexes = filterIndexes(data, (e) => {
             return e.startsWith("<p style=")
         });
         return indexes.map((index): Tag => {

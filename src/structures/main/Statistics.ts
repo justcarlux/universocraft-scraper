@@ -4,7 +4,7 @@ import { BuildBattleStatistics } from "../stats/BuildBattleStatistics";
 import { CaptureTheWoolStatistics } from "../stats/CaptureTheWoolStatistics";
 import { DestroyTheNexusStatistics } from "../stats/DestroyTheNexusStatistics";
 import { EggWarsStatistics } from "../stats/EggWarsStatistics";
-import { HungerGamesStatistics } from "../stats/HungerGamesStatistics";
+import { SurvivalGamesStatistics } from "../stats/SurvivalGamesStatistics";
 import { LuckyWarsStatistics } from "../stats/LuckyWarsStatistics";
 import { MurderMysteryStatistics } from "../stats/MurderMysteryStatistics";
 import { PartyGamesStatistics } from "../stats/PartyGamesStatistics";
@@ -22,7 +22,8 @@ import { TheBridgeDoublesStatistics } from "../stats/TheBridgeDoublesStatistics"
 import { TheBridgeThreesStatistics } from "../stats/TheBridgeThreesStatistics";
 import { TheBridgeLegacyStatistics } from "../stats/TheBridgeLegacyStatistics";
 import { UHCStatistics } from "../stats/UHCStatistics";
-
+import { HideAndSeekStatistics } from "../stats/HideAndSeekStatistics";
+import { PinturilloStatistics } from "../stats/PinturilloStatistics";
 
 export interface Statistics {
     skyBlock: SkyBlockStatistics,
@@ -42,10 +43,12 @@ export interface Statistics {
     speedBuilders: SpeedBuildersStatistics,
     tntRun: TNTRunStatistics,
     tntTag: TNTTagStatistics,
+    hideAndSeek: HideAndSeekStatistics,
+    pinturillo: PinturilloStatistics,
     buildBattle: BuildBattleStatistics,
     runFromTheBeast: RunFromTheBeastStatistics,
     partyGames: PartyGamesStatistics,
-    hungerGames: HungerGamesStatistics,
+    survivalGames: SurvivalGamesStatistics,
     skyPit: SkyPitStatistics,
     arenaPvP: ArenaPvPStatistics,
     uhc: UHCStatistics,

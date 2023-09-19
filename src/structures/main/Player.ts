@@ -1,5 +1,5 @@
 import { Rank } from "../misc/Rank";
-import { Tag } from "../misc/TagInfo";
+import { Tag } from "../misc/Tag";
 
 export interface Player {
     /** Player username */

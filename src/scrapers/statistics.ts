@@ -7,10 +7,12 @@ import { BuildBattleStatistics } from "../structures/stats/BuildBattleStatistics
 import { CaptureTheWoolStatistics } from "../structures/stats/CaptureTheWoolStatistics";
 import { DestroyTheNexusStatistics } from "../structures/stats/DestroyTheNexusStatistics";
 import { EggWarsStatistics } from "../structures/stats/EggWarsStatistics";
-import { HungerGamesStatistics } from "../structures/stats/HungerGamesStatistics";
+import { HideAndSeekStatistics } from "../structures/stats/HideAndSeekStatistics";
+import { SurvivalGamesStatistics } from "../structures/stats/SurvivalGamesStatistics";
 import { LuckyWarsStatistics } from "../structures/stats/LuckyWarsStatistics";
 import { MurderMysteryStatistics } from "../structures/stats/MurderMysteryStatistics";
 import { PartyGamesStatistics } from "../structures/stats/PartyGamesStatistics";
+import { PinturilloStatistics } from "../structures/stats/PinturilloStatistics";
 import { RunFromTheBeastStatistics } from "../structures/stats/RunFromTheBeastStatistics";
 import { SkyBlockStatistics } from "../structures/stats/SkyBlockStatistics";
 import { SkyPitStatistics } from "../structures/stats/SkyPitStatistics";
@@ -30,7 +32,7 @@ import { appropiateStatParse } from "./util";
 
 export function getPlayerStatistics(serialized: string[]): Statistics {
     
-    const indexes = filterIndexes(serialized, (e: string) => {
+    const indexes = filterIndexes(serialized, (e) => {
         return e.includes(`class="game-header-title`) ||
         e.includes(`<div class="game-content">`);
     });
@@ -100,10 +102,12 @@ export function getPlayerStatistics(serialized: string[]): Statistics {
         speedBuilders: new SpeedBuildersStatistics(raw.get("speedBuilders")),
         tntRun: new TNTRunStatistics(raw.get("tntRun")),
         tntTag: new TNTTagStatistics(raw.get("tntTag")),
+        hideAndSeek: new HideAndSeekStatistics(raw.get("hideAndSeek")),
+        pinturillo: new PinturilloStatistics(raw.get("pinturillo")),
         buildBattle: new BuildBattleStatistics(raw.get("buildBattle")),
         runFromTheBeast: new RunFromTheBeastStatistics(raw.get("runFromTheBeast")),
         partyGames: new PartyGamesStatistics(raw.get("partyGames")),
-        hungerGames: new HungerGamesStatistics(raw.get("hungerGames")),
+        survivalGames: new SurvivalGamesStatistics(raw.get("survivalGames")),
         skyPit: new SkyPitStatistics(raw.get("skyPit")),
         arenaPvP: new ArenaPvPStatistics(raw.get("arenaPvP")),
         uhc: new UHCStatistics(raw.get("uhc")),

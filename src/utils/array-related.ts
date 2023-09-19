@@ -1,4 +1,4 @@
-export function filterIndexes(array: any[], checker: (element: any, index: number) => boolean) {
+export function filterIndexes<T>(array: T[], checker: (element: T, index: number) => boolean) {
     const result: number[] = [];
     while (true) {
         const index = array.findIndex((value, index) => {

@@ -33,6 +33,7 @@
 	"asesinato como bestia": "killsAsBeast",
 	"nivel": "level",
 	"asistencias": "assistances",
-	"distancia máxima de muerte con arco": "maximumBowDeathDistance",
-	"lanas colocadas": "placedWools"
+	"distancia máxima de muerte con arco": "maximumBowKillDistance",
+	"lanas colocadas": "placedWools",
+	"palabras correctas": "correctWords"
 }
