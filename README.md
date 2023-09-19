@@ -136,7 +136,7 @@ queryUserByUuid(uuid: string, addUuidDashes?: boolean): Promise<UserQuery | null
 ```
 Fetch statistics and player information from UniversoCraft given a Minecraft profile UUID.
 - uuid (`string`): Minecraft UUID of the player.
-- addUuidDashes (`string`): Manually add the dashes needed for the UUID to work.
+- addUuidDashes (optional, `boolean`): Manually add the dashes needed for the UUID to work.
 
 Both functions return a `Promise` with an `UserQuery` object with the player information, or null if it was not found.
 
