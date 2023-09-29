@@ -11,7 +11,7 @@ Scrap almost anything from the hispanic Minecraft server [UniversoCraft's statis
     const { queryUserByUsername } = require("universocraft-scraper");
 
     // Using TypeScript or ESM
-    import { queryUserByUsername } from "speedtest-result-scraper";
+    import { queryUserByUsername } from "universocraft-scraper";
     ```
 
 2. Then, you can call any function by passing the required arguments:
