@@ -50,7 +50,7 @@ const months = [
 ]
 
 function getDayMonthAndYear(text: string) {
-    let [day, month, year] = text.split("-");
+    const [day, month, year] = text.split("-");
     return {
         day: parseInt(day),
         month: months.includes(month) ? months.indexOf(month) : 0,

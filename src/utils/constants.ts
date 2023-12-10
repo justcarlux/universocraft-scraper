@@ -109,6 +109,7 @@ const TopRoutes = {
         "BowKills": "ctw/bow_kills",
         "MaximumBowKillDistance": "ctw/bow_distance_kill",
         "WoolPlaced": "ctw/wool_placed",
+        "DoubleWoolPlaced": "ctw/double_wool_placed",
         "Score": "ctw/score"
     }
 }

@@ -4,7 +4,6 @@ import path from "path";
 import { UserQuery } from "../src/structures/main/UserQuery";
 import { TopEntry } from "../src/structures/main/TopEntry";
 
-
 try {
     if (!existsSync(path.join(__dirname, "data"))) {
         mkdirSync(path.join(__dirname, "data"));
@@ -83,6 +82,18 @@ test("query user with hide and seek and pinturillo statistics", async () => {
         keys.includes("statistics") &&
         info?.statistics.hideAndSeek.unicoins &&
         info?.statistics.pinturillo.wins
+    ).toBeTruthy();
+}, 15_000);
+
+test("query user with capture the wool statistics", async () => {
+    await wait();
+    const info = await queryUserByUsername("Yoo_eeL");
+    const keys = Object.keys(info ?? {});
+    saveInfo(info, "Yoo_eeL.json");
+    return expect(
+        keys.includes("player") &&
+        keys.includes("statistics") &&
+        info?.statistics.captureTheWool.wins
     ).toBeTruthy();
 }, 15_000);
 

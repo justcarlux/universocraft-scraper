@@ -35,5 +35,7 @@
 	"asistencias": "assistances",
 	"distancia máxima de muerte con arco": "maximumBowKillDistance",
 	"lanas colocadas": "placedWools",
-	"palabras correctas": "correctWords"
+	"palabras correctas": "correctWords",
+	"defensas": "defenses",
+	"doble lanas": "doubleWools"
 }
