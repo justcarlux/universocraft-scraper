@@ -31,92 +31,43 @@ Scrap almost anything from the hispanic Minecraft server [UniversoCraft's statis
             "head": "https://api.mineskin.org/render/head?url=http://textures.minecraft.net/texture/387314a97b1732d7eb2f8e1b14798df1ae38b6878620e9c15647042443bafdf7",
             "skin": "http://textures.minecraft.net/texture/387314a97b1732d7eb2f8e1b14798df1ae38b6878620e9c15647042443bafdf7",
             "ranks": [
-                "usuar",
+                "usu",
                 "premium"
             ],
             "tags": [],
-            "lastSeen": "2023-09-18T17:59:00.000Z"
+            "lastConnection": "2024-02-05T22:14:00.000Z",
+            "lastVersion": "1.8.9",
+            "firstConnection": "2019-03-27T07:10:00.000Z",
+            "friends": 4
         },
         "statistics": {
-            "skyBlock": {
-                ...
-            },
+            "partyGames": { ... },
+            "speedBuilders": { ... },
+            "teamSkywars": { ... },
+            "buildBattle": { ... },
+            "skyPit": { ... },
+            "tntRun": { ... },
+            "pinturillo": { ... },
+            "captureTheWool": { ... },
+            "eggWars": { ... },
+            "destroyTheNexus": { ... },
+            "murderMystery": { ... },
+            "arenaPvP": { ... },
+            "skyWars": { ... },
+            "uhc": { ... },
+            "survivalGames": { ... },
+            "tntTag": { ... },
+            "skyBlock": { ... },
+            "bedWars": { ... },
+            "runFromTheBeast": { ... },
+            "luckyWars": { ... },
+            "hideAndSeek": { .. },
             "theBridge": {
-                "total": {
-                    ...
-                },
-                "solo": {
-                    ...
-                },
-                "doubles": {
-                    ...
-                },
-                "threes": {
-                    ...
-                },
-                "legacy": {
-                    ...
-                }
-            },
-            "destroyTheNexus": {
-                ...
-            },
-            "skyWars": {
-                ...
-            },
-            "luckyWars": {
-                ...
-            },
-            "eggWars": {
-                ...
-            },
-            "bedWars": {
-                ...
-            },
-            "teamSkywars": {
-                ...
-            },
-            "speedBuilders": {
-                ...
-            },
-            "tntRun": {
-                ...
-            },
-            "tntTag": {
-                ...
-            },
-            "hideAndSeek": {
-                ...
-            },
-            "pinturillo": {
-                ...
-            },
-            "buildBattle": {
-                ...
-            },
-            "runFromTheBeast": {
-                ...
-            },
-            "partyGames": {
-                ...
-            },
-            "survivalGames": {
-                ...
-            },
-            "skyPit": {
-                ...
-            },
-            "arenaPvP": {
-                ...
-            },
-            "uhc": {
-                ...
-            },
-            "murderMystery": {
-                ...
-            },
-            "captureTheWool": {
-                ...
+                "total": { ... },
+                "solo": { ... },
+                "doubles": { ... },
+                "threes": { ... },
+                "legacy": { ... }
             }
         }
     }
