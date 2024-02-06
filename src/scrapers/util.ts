@@ -1,3 +1,15 @@
+export function parseSkinData(text: string) {
+    const head = text?.match(/https:\/\/.+"\s/g)?.at(0)?.slice(0, -2) ?? null;
+    if (!head) return { head: null, skin: null };
+    const skin = ((): string | null => {
+        try {
+            return new URL(head as string).searchParams.get("url");
+        } catch (err) {}
+        return "";
+    })();
+    return { head, skin };
+}
+
 export function appropiateStatParse(data: string) {
     if (
         data.includes("d") ||
@@ -22,35 +34,27 @@ export function appropiateStatParse(data: string) {
         })
         .reduce((accumulated, current) => accumulated + current, 0)
     } else {
-        return parseFloat(data);
+        return parseFloat(data.split(",").join(""));
     }
 }
 
-function getHoursAndMinutes(text: string) {
-    const [hour, type] = text.split(/ +/g);
+function getHoursMinutesAndGMT(text: string) {
+    const [hour, type, gmt] = text.split(/ +/g);
     const split = hour.split(":");
-    const data = { hours: parseInt(split[0]), minutes: parseInt(split[1]) }
-    if (type.includes("a.m.")) return data;
-    return { hours: 12 + data.hours, minutes: data.minutes };
+    const data = {
+        hours: parseInt(split[0]),
+        minutes: parseInt(split[1]),
+        gmt: parseInt(gmt.match(/(\+|-)\d+/g)?.at(0) ?? "0")
+    }
+    if (type.includes("p.m.")) data.hours += 12;
+    return data;
 }
 
-const months = [
-    "Ene",
-    "Feb",
-    "Mar",
-    "Abr",
-    "May",
-    "Jun",
-    "Jul",
-    "Ago",
-    "Sep",
-    "Oct",
-    "Nov",
-    "Dic"
-]
+const months = ["Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio", "Julio", "Agosto", "Setiembre", "Octubre", "Noviembre", "Diciembre"];
 
 function getDayMonthAndYear(text: string) {
-    const [day, month, year] = text.split("-");
+    const [day, month, year] = text.split(/del|de/)
+    .map(e => e.trim());
     return {
         day: parseInt(day),
         month: months.includes(month) ? months.indexOf(month) : 0,
@@ -58,19 +62,17 @@ function getDayMonthAndYear(text: string) {
     }
 }
 
-export function parseLastSeenTimeString(text: string) {
+export function parseLastSeenTimeString(text: string, separator: string) {
 
-    if (text.includes("Eterna")) return null;
-    const [timeString, dateString] = text.split("del");
-    const { hours, minutes } = getHoursAndMinutes(timeString.trim());
-    
-    const dateStringSplit = dateString.trim().split(/ +/g);
-    const currentGMT = new Date().getTimezoneOffset() / 60;
-    const suppliedGMT = parseInt(dateStringSplit?.at(1)?.match(/(\+|-)\d+/g)?.at(0) ?? "0");
-    const { day, month, year } = getDayMonthAndYear(dateStringSplit[0].trim());
+    if (text.includes("Eternidad")) return null;
+    const [dateString, timeString] = text.split(separator);
+
+    const { hours, minutes, gmt: suppliedGMT } = getHoursMinutesAndGMT(timeString.trim());
+    const { day, month, year } = getDayMonthAndYear(dateString);
 
     const date = new Date(year, month, day, hours, minutes);
-    const difference = (currentGMT + suppliedGMT) * 1000 * 60 * 60;
+    const currentGMT = new Date().getTimezoneOffset() / 60;
+    const difference = (currentGMT + suppliedGMT - 1) * 1000 * 60 * 60;
     return new Date(date.getTime() - difference);
     
 }

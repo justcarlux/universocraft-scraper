@@ -1,64 +1,62 @@
 import { filterIndexes } from "../utils/array-related";
 import { Player } from "../structures/main/Player";
-import { Rank, availableRanks } from "../structures/misc/Rank";
+import { Rank } from "../structures/misc/Rank";
 import { Tag } from "../structures/misc/Tag";
 import { RGBColorTuple } from "../structures/misc/RGBColorTuple";
-import { parseLastSeenTimeString } from "./util";
+import { parseLastSeenTimeString, parseSkinData } from "./util";
 
 export function getPlayerInfo(serialized: string[]): Player {
 
     const username = serialized.at(
-        serialized.findIndex(e => e.includes(`<div class="player-name">`)) + 2
-    ) ?? "";
+        serialized.findIndex(e => e.includes(`class="ProfileName"`)) + 2
+    ) as string;
 
-    const head = serialized.at(
-        serialized.findIndex(e => e.includes(`<div class="player-image-border">`)) + 1
-    )?.match(/https:\/\/.+"\s/g)?.at(0)?.slice(0, -2) ?? "";
+    const { head, skin } = parseSkinData(serialized.at(
+        serialized.findIndex(e => e.includes(`<meta property="og:image"`))
+    ) as string) as { head: string, skin: string }
 
     const lastSeen = (() => {
         const text = serialized.at(
-            serialized.findIndex(e => e.includes(`Última conexión`)) + 4
+            serialized.findIndex(e => e.includes(`Última Conexión`)) + 3
         ) ?? "";
-        return parseLastSeenTimeString(text);
+        return parseLastSeenTimeString(text, "\n");
     })();
-
-    const skin = ((): string => {
-        try {
-            return new URL(head).searchParams.get("url") ?? "";
-        } catch (err) {}
-        return "";
-    })();
-
-    const ranks = serialized.filter((e) => {
-        return e.includes(`<div class="player-status-block`);
-    }).map(data => {
-        return availableRanks.find(rank => data.includes(rank))
-    }).filter(e => e) as Rank[];
     
+    const ranks = filterIndexes(serialized, (element) => element.includes(`<span class="ProfileTag `))
+    .map(e => serialized[e + 1].split(" ")[0].trim().toLowerCase()) as Rank[];
+
     const tags = (() => {
-        const startIndex = serialized.findIndex(e => e.includes(`<div class="player-tag">`));
-        const data = serialized.slice(
-            startIndex,
-            serialized.findIndex((e, index) => e.includes("</div>") && index > startIndex)
-        );
-        const indexes = filterIndexes(data, (e) => {
-            return e.startsWith("<p style=")
-        });
+        const indexes = filterIndexes(serialized, (e) => e.includes(`<div class="ProfilePlayerTag `));
         return indexes.map((index): Tag => {
             return {
-                color: (data
+                name: serialized[index + 1],
+                color: (serialized
                 .at(index)
                 ?.match(/rgb\([0-9]+(| +),(| +)+[0-9]+(| +),(| +)[0-9]+\)/g)
                 ?.at(0)
                 ?.split(",")
                 .map((value) => {
                     return parseInt(value.match(/\d+/g)?.at(0) ?? "0");
-                }) || []) as RGBColorTuple,
-                name: data[index + 1]
+                }) || []) as RGBColorTuple
             }
         })
     })();
-
-    return { username, head, skin, ranks, tags, lastSeen }
+    
+    const profileStats = filterIndexes(serialized, (e) => e.includes(`<div class="ProfileStat">`));
+    const lastVersion = serialized[
+        serialized.slice(profileStats[0]).findIndex(e => e.includes(`ProfileStat__Value`)) + profileStats[0] + 1
+    ];
+    const firstConnection = parseLastSeenTimeString(
+        serialized[
+            serialized.slice(profileStats[1]).findIndex(e => e.includes(`ProfileStat__Value`)) + profileStats[1] + 1
+        ], "-"
+    ) as Date;
+    const friends = parseInt(
+        serialized[
+            serialized.slice(profileStats[2]).findIndex(e => e.includes(`ProfileStat__Value`)) + profileStats[2] + 1
+        ]
+    );
+    
+    return { username, head, skin, ranks, tags, lastConnection: lastSeen, lastVersion, firstConnection, friends };
 
 }

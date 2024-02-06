@@ -1,6 +1,6 @@
 import { getTopEntries } from "../scrapers/top";
 import { TopEntry } from "../structures/main/TopEntry";
-import { baseURL } from "../utils/constants";
+import { TopRoutes, baseURL } from "../utils/constants";
 import { splitData } from "../utils/split-data";
 
 /**
@@ -23,7 +23,7 @@ export async function fetchTop(route: string, page?: number): Promise<TopEntry[]
     }
 
     const data = await (
-        await fetch(`${baseURL}/tops/${route}/${page ?? 1}`)
+        await fetch(`${baseURL}/tops/${route}/?page=${encodeURIComponent(page ?? 1)}`)
     ).text();
     
     if (!data.trim()) {
@@ -31,11 +31,12 @@ export async function fetchTop(route: string, page?: number): Promise<TopEntry[]
     }
 
     if (
-        data.includes("Se podrán ver los tops globales de cada modalidad.")
+        data.includes("404 ERROR") ||
+        data.includes("Server Error")
     ) {
         throw new Error("Invalid provided arguments. URL didn't work.");
     }
-
+    
     const serialized = splitData(data);
     return getTopEntries(serialized);
 

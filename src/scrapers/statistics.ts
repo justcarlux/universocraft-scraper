@@ -31,12 +31,13 @@ import { filterIndexes } from "../utils/array-related";
 import { appropiateStatParse } from "./util";
 
 export function getPlayerStatistics(serialized: string[]): Statistics {
-    
+
     const indexes = filterIndexes(serialized, (e) => {
-        return e.includes(`class="game-header-title`) ||
-        e.includes(`<div class="game-content">`);
+        return e.includes(`<h2 class="GameTitleText"`) ||
+            e.includes(`<div class="GameStats">`) ||
+            e.includes(`<div class="GameMode`);
     });
-    
+
     const raw = new Map<string, any>();
     let currentGamemodeKey = "";
     let currentStatKey = "";
@@ -46,9 +47,11 @@ export function getPlayerStatistics(serialized: string[]): Statistics {
             currentGamemodeKey = minigames[serialized[value + 1] as keyof typeof minigames];
             return;
         }
+
         while (true) {
             value++;
             const data = serialized[value];
+
             if (
                 // finish when it finds 3 consecutive div close tags
                 serialized[value - 2].includes("</div>") &&
@@ -59,15 +62,15 @@ export function getPlayerStatistics(serialized: string[]): Statistics {
             }
 
             // hardcode for the bridge since it is tabulated :(
-            if (data.includes(`id="thebridge"`)) {
+            if (serialized[value - 2].includes(`id="thebridge-TOTAL"`)) {
                 currentGamemodeKey = "theBridgeTotal";
-            } else if (data.includes(`id="thebridgesolo_"`)) {
+            } else if (serialized[value - 2].includes(`id="thebridge-SOLO"`)) {
                 currentGamemodeKey = "theBridgeSolo";
-            } else if (data.includes(`id="thebridgedoubles_"`)) {
+            } else if (serialized[value - 2].includes(`id="thebridge-DOBLES"`)) {
                 currentGamemodeKey = "theBridgeDoubles";
-            } else if (data.includes(`id="thebridgetriples_"`)) {
+            } else if (serialized[value - 2].includes(`id="thebridge-TRIPLES"`)) {
                 currentGamemodeKey = "theBridgeThrees";
-            } else if (data.includes(`id="thebridgelegacy_"`)) {
+            } else if (serialized[value - 2].includes(`id="thebridge-LEGACY"`)) {
                 currentGamemodeKey = "theBridgeLegacy";
             }
 
@@ -85,34 +88,34 @@ export function getPlayerStatistics(serialized: string[]): Statistics {
     });
 
     return {
+        partyGames: new PartyGamesStatistics(raw.get("partyGames")),
+        speedBuilders: new SpeedBuildersStatistics(raw.get("speedBuilders")),
+        teamSkywars: new TeamSkyWarsStatistics(raw.get("teamSkywars")),
+        buildBattle: new BuildBattleStatistics(raw.get("buildBattle")),
+        skyPit: new SkyPitStatistics(raw.get("skyPit")),
+        tntRun: new TNTRunStatistics(raw.get("tntRun")),
+        pinturillo: new PinturilloStatistics(raw.get("pinturillo")),
+        captureTheWool: new CaptureTheWoolStatistics(raw.get("captureTheWool")),
+        eggWars: new EggWarsStatistics(raw.get("eggWars")),
+        destroyTheNexus: new DestroyTheNexusStatistics(raw.get("destroyTheNexus")),
+        murderMystery: new MurderMysteryStatistics(raw.get("murderMystery")),
+        arenaPvP: new ArenaPvPStatistics(raw.get("arenaPvP")),
+        skyWars: new SkyWarsStatistics(raw.get("skyWars")),
+        uhc: new UHCStatistics(raw.get("uhc")),
+        survivalGames: new SurvivalGamesStatistics(raw.get("survivalGames")),
+        tntTag: new TNTTagStatistics(raw.get("tntTag")),
         skyBlock: new SkyBlockStatistics(raw.get("skyBlock")),
+        bedWars: new BedWarsStatistics(raw.get("bedWars")),
+        runFromTheBeast: new RunFromTheBeastStatistics(raw.get("runFromTheBeast")),
+        luckyWars: new LuckyWarsStatistics(raw.get("luckyWars")),
+        hideAndSeek: new HideAndSeekStatistics(raw.get("hideAndSeek")),
         theBridge: {
             total: new TheBridgeTotalStatistics(raw.get("theBridgeTotal")),
             solo: new TheBridgeSoloStatistics(raw.get("theBridgeSolo")),
             doubles: new TheBridgeDoublesStatistics(raw.get("theBridgeDoubles")),
             threes: new TheBridgeThreesStatistics(raw.get("theBridgeThrees")),
             legacy: new TheBridgeLegacyStatistics(raw.get("theBridgeLegacy"))
-        },
-        destroyTheNexus: new DestroyTheNexusStatistics(raw.get("destroyTheNexus")),
-        skyWars: new SkyWarsStatistics(raw.get("skyWars")),
-        luckyWars: new LuckyWarsStatistics(raw.get("luckyWars")),
-        eggWars: new EggWarsStatistics(raw.get("eggWars")),
-        bedWars: new BedWarsStatistics(raw.get("bedWars")),
-        teamSkywars: new TeamSkyWarsStatistics(raw.get("teamSkywars")),
-        speedBuilders: new SpeedBuildersStatistics(raw.get("speedBuilders")),
-        tntRun: new TNTRunStatistics(raw.get("tntRun")),
-        tntTag: new TNTTagStatistics(raw.get("tntTag")),
-        hideAndSeek: new HideAndSeekStatistics(raw.get("hideAndSeek")),
-        pinturillo: new PinturilloStatistics(raw.get("pinturillo")),
-        buildBattle: new BuildBattleStatistics(raw.get("buildBattle")),
-        runFromTheBeast: new RunFromTheBeastStatistics(raw.get("runFromTheBeast")),
-        partyGames: new PartyGamesStatistics(raw.get("partyGames")),
-        survivalGames: new SurvivalGamesStatistics(raw.get("survivalGames")),
-        skyPit: new SkyPitStatistics(raw.get("skyPit")),
-        arenaPvP: new ArenaPvPStatistics(raw.get("arenaPvP")),
-        uhc: new UHCStatistics(raw.get("uhc")),
-        murderMystery: new MurderMysteryStatistics(raw.get("murderMystery")),
-        captureTheWool: new CaptureTheWoolStatistics(raw.get("captureTheWool"))
+        }
     }
 
 }

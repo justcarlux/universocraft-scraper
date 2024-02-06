@@ -1,12 +1,19 @@
-import { existsSync, mkdirSync, writeFileSync } from "fs";
+import { existsSync, mkdirSync, readdirSync, rmSync, writeFileSync } from "fs";
 import { TopRoutes, fetchTop, queryUserByUsername, queryUserByUuid } from "../src/index";
 import path from "path";
 import { UserQuery } from "../src/structures/main/UserQuery";
 import { TopEntry } from "../src/structures/main/TopEntry";
 
+const dataFolder = path.join(__dirname, "data");
 try {
-    if (!existsSync(path.join(__dirname, "data"))) {
-        mkdirSync(path.join(__dirname, "data"));
+    if (!existsSync(dataFolder)) {
+        mkdirSync(dataFolder);
+    } else {
+        const files = readdirSync(dataFolder);
+        for (let index = 0; index < files.length; index++) {
+            const file = files[index];
+            if (file.endsWith(".json")) rmSync(path.join(dataFolder, file));
+        }
     }
 } catch (err) {}
 
@@ -25,7 +32,7 @@ async function wait() {
     });
 }
 
-test("query user (myself)", async () => {
+test("query user (myself with nick)", async () => {
     await wait();
     const info = await queryUserByUsername("JustCarluX");
     const keys = Object.keys(info ?? {});
@@ -36,9 +43,9 @@ test("query user (myself)", async () => {
     ).toBeTruthy();
 }, 15_000);
 
-test("query user (myself, uuid w/ dashes)", async () => {
+test("query user (myself with dashes)", async () => {
     await wait();
-    const info = await queryUserByUuid("460e9c28-f52f-4548-91aa-c113059b98a2");
+    const info = await queryUserByUuid("460e9c28f52f454891aac113059b98a2");
     const keys = Object.keys(info ?? {});
     saveInfo(info, "JustCarluX-2.json");
     return expect(
@@ -47,24 +54,11 @@ test("query user (myself, uuid w/ dashes)", async () => {
     ).toBeTruthy();
 }, 15_000);
 
-
-test("query user (myself, uuid without dashes)", async () => {
-    await wait();
-    const info = await queryUserByUuid("460e9c28f52f454891aac113059b98a2", true);
-    const keys = Object.keys(info ?? {});
-    saveInfo(info, "JustCarluX-3.json");
-    return expect(
-        keys.includes("player") &&
-        keys.includes("statistics")
-    ).toBeTruthy();
-}, 15_000);
-
-
 test("query user with tags", async () => {
     await wait();
-    const info = await queryUserByUsername("wMal");
+    const info = await queryUserByUsername("denila");
     const keys = Object.keys(info ?? {});
-    saveInfo(info, "wMal.json");
+    saveInfo(info, "denila.json");
     return expect(
         keys.includes("player") &&
         keys.includes("statistics") &&
@@ -74,13 +68,13 @@ test("query user with tags", async () => {
 
 test("query user with hide and seek and pinturillo statistics", async () => {
     await wait();
-    const info = await queryUserByUsername("JeanJxmxn");
+    const info = await queryUserByUsername("gonzaestrella");
     const keys = Object.keys(info ?? {});
-    saveInfo(info, "JeanJxmxn.json");
+    saveInfo(info, "gonzaestrella.json");
     return expect(
         keys.includes("player") &&
         keys.includes("statistics") &&
-        info?.statistics.hideAndSeek.unicoins &&
+        info?.statistics.hideAndSeek.wins &&
         info?.statistics.pinturillo.wins
     ).toBeTruthy();
 }, 15_000);
@@ -105,8 +99,8 @@ test("query an admin w/ no last seen date", async () => {
     return expect(
         keys.includes("player") &&
         keys.includes("statistics") &&
-        info?.player.ranks.includes("admin") &&
-        !info?.player.lastSeen
+        info?.player.ranks.includes("adm") &&
+        !info?.player.lastConnection
     ).toBeTruthy();
 }, 15_000);
 

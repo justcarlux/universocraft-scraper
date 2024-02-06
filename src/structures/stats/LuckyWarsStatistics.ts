@@ -5,7 +5,9 @@ interface ILuckyWarsStatistics {
     placedBlocks: number,
     brokenBlocks: number,
     launchedProjectiles: number,
-    landedProjectiles: number
+    landedProjectiles: number,
+    karma: number,
+    kdr: number
 }
 
 export class LuckyWarsStatistics implements ILuckyWarsStatistics {
@@ -17,6 +19,8 @@ export class LuckyWarsStatistics implements ILuckyWarsStatistics {
     public brokenBlocks: number;
     public launchedProjectiles: number;
     public landedProjectiles: number;
+    public karma: number;
+    public kdr: number;
     constructor(data?: ILuckyWarsStatistics) {
         this.wins = data?.wins ?? 0;
         this.kills = data?.kills ?? 0;
@@ -25,6 +29,8 @@ export class LuckyWarsStatistics implements ILuckyWarsStatistics {
         this.brokenBlocks = data?.brokenBlocks ?? 0;
         this.launchedProjectiles = data?.launchedProjectiles ?? 0;
         this.landedProjectiles = data?.landedProjectiles ?? 0;
+        this.karma = data?.karma ?? 0;
+        this.kdr = data?.kdr ?? 0;
     }
 
 }

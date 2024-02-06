@@ -132,11 +132,10 @@ Fetch statistics and player information from UniversoCraft given an username.
 - username (`string`): Username of the player.
 
 ```ts
-queryUserByUuid(uuid: string, addUuidDashes?: boolean): Promise<UserQuery | null>
+queryUserByUuid(uuid: string): Promise<UserQuery | null>
 ```
 Fetch statistics and player information from UniversoCraft given a Minecraft profile UUID.
-- uuid (`string`): Minecraft UUID of the player.
-- addUuidDashes (optional, `boolean`): Manually add the dashes needed for the UUID to work.
+- uuid (`string`): Minecraft profile UUID of the player.
 
 Both functions return a `Promise` with an `UserQuery` object with the player information, or null if it was not found. Throws an error when the page doesn't return any data or or when the `fetch` fails.
 
@@ -149,7 +148,10 @@ interface Player {
     skin: string, // Player skin texture link, grabbed from the head link
     ranks: Rank[], // List of player ranks
     tags: Tag[], // List of player tags
-    lastSeen: Date | null // Date the player was last connected to the server
+    lastConnection: Date | null, // Date when the player last connected to the server. Equals to `null` if the date is "eternal"
+    lastVersion: string, // Last Minecraft version the player used to connect to the server
+    firstConnection: Date, // Date when the player first connected to the server
+    friends: number // Player friend count
 }
 ```
 
@@ -157,40 +159,38 @@ interface Player {
 
 ```ts
 interface Statistics {
+    partyGames: PartyGamesStatistics,
+    speedBuilders: SpeedBuildersStatistics,
+    teamSkywars: TeamSkyWarsStatistics,
+    buildBattle: BuildBattleStatistics,
+    skyPit: SkyPitStatistics,
+    tntRun: TNTRunStatistics,
+    pinturillo: PinturilloStatistics,
+    captureTheWool: CaptureTheWoolStatistics,
+    eggWars: EggWarsStatistics,
+    destroyTheNexus: DestroyTheNexusStatistics,
+    murderMystery: MurderMysteryStatistics,
+    arenaPvP: ArenaPvPStatistics,
+    skyWars: SkyWarsStatistics,
+    uhc: UHCStatistics,
+    survivalGames: SurvivalGamesStatistics,
+    tntTag: TNTTagStatistics,
     skyBlock: SkyBlockStatistics,
+    bedWars: BedWarsStatistics,
+    runFromTheBeast: RunFromTheBeastStatistics,
+    luckyWars: LuckyWarsStatistics,
+    hideAndSeek: HideAndSeekStatistics,
     theBridge: {
         total: TheBridgeTotalStatistics,
         solo: TheBridgeSoloStatistics,
         doubles: TheBridgeDoublesStatistics,
         threes: TheBridgeThreesStatistics,
         legacy: TheBridgeLegacyStatistics
-    },
-    destroyTheNexus: DestroyTheNexusStatistics,
-    skyWars: SkyWarsStatistics,
-    luckyWars: LuckyWarsStatistics,
-    eggWars: EggWarsStatistics,
-    bedWars: BedWarsStatistics,
-    teamSkywars: TeamSkyWarsStatistics,
-    speedBuilders: SpeedBuildersStatistics,
-    tntRun: TNTRunStatistics,
-    tntTag: TNTTagStatistics,
-    hideAndSeek: HideAndSeekStatistics,
-    pinturillo: PinturilloStatistics,
-    buildBattle: BuildBattleStatistics,
-    runFromTheBeast: RunFromTheBeastStatistics,
-    partyGames: PartyGamesStatistics,
-    survivalGames: SurvivalGamesStatistics,
-    skyPit: SkyPitStatistics,
-    arenaPvP: ArenaPvPStatistics,
-    uhc: UHCStatistics,
-    murderMystery: MurderMysteryStatistics,
-    captureTheWool: CaptureTheWoolStatistics
+    }
 }
 ```
 
-Some notes:
-- Every single statistic is parsed as a number automatically. `playedTime` properties are properly converted from the page's time string to milliseconds.
-- It's not really clear what's the meaning of the number found in `yt` ranks. Probably varies depending on the YouTuber's popularity.
+**Note:** Every single statistic is parsed as a number automatically. `playedTime` properties are properly converted from the page's time string to milliseconds.
 
 # `fetchTop`
 ```ts
@@ -213,3 +213,5 @@ Returns a `Promise` with an array of the `TopEntry` object with the information,
 - TopEntry.username (`string`): Player username.
 - TopEntry.value (`number`): Statistic number.
 - TopEntry.url (`string`): Player's profile URL.
+- TopEntry.head (`string | null`): Link of the player's head used in the statistics page, belongs to the Mineskin API (only available for players in the top 5).
+- TopEntry.skin (`string | null`): Player skin texture link, grabbed from the head link (only available for players in the top 5).

@@ -5,7 +5,9 @@ interface ISkyBlockStatistics {
     unicoins: number,
     bankAccount: number,
     gems: number,
-    playedTime: number
+    playedTime: number,
+    karma: number,
+    kdr: number
 }
 
 export class SkyBlockStatistics implements ISkyBlockStatistics {
@@ -17,6 +19,8 @@ export class SkyBlockStatistics implements ISkyBlockStatistics {
     public bankAccount: number;
     public gems: number;
     public playedTime: number;
+    public karma: number;
+    public kdr: number;
     constructor(data?: ISkyBlockStatistics) {
         this.generalLevel = data?.generalLevel ?? 0;
         this.kills = data?.kills ?? 0;
@@ -25,6 +29,8 @@ export class SkyBlockStatistics implements ISkyBlockStatistics {
         this.bankAccount = data?.bankAccount ?? 0;
         this.gems = data?.gems ?? 0;
         this.playedTime = data?.playedTime ?? 0;
+        this.karma = data?.karma ?? 0;
+        this.kdr = data?.kdr ?? 0;
     }
 
 }

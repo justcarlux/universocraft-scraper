@@ -6,7 +6,8 @@ interface ICaptureTheWoolStatistics {
     placedWools: number,
     wins: number,
     defenses: number,
-    doubleWools: number
+    doubleWools: number,
+    karma: number
 }
 
 export class CaptureTheWoolStatistics implements ICaptureTheWoolStatistics {
@@ -19,6 +20,7 @@ export class CaptureTheWoolStatistics implements ICaptureTheWoolStatistics {
     public wins: number;
     public defenses: number;
     public doubleWools: number;
+    public karma: number;
     constructor(data?: ICaptureTheWoolStatistics) {
         this.score = data?.score ?? 0;
         this.kills = data?.kills ?? 0;
@@ -28,6 +30,7 @@ export class CaptureTheWoolStatistics implements ICaptureTheWoolStatistics {
         this.wins = data?.wins ?? 0;
         this.defenses = data?.defenses ?? 0;
         this.doubleWools = data?.doubleWools ?? 0;
+        this.karma = data?.karma ?? 0;
     }
 
 }

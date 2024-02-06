@@ -11,22 +11,20 @@ import { splitData } from "../utils/split-data";
 */
 export async function queryUserByUsername(username: string): Promise<UserQuery | null> {
     const data = await (
-        await fetch(`${baseURL}/stats.php?player=${encodeURIComponent(username)}`)
+        await fetch(`${baseURL}/jugador/${encodeURIComponent(username)}`)
     ).text();
     return parseQuery(data);
 }
 
-
 /**
- * Fetch statistics and player information from UniversoCraft given a Minecraft profile UUID.. Returns a `Promise` with an `UserQuery` object with the player information, or null if it was not found.
- * @param { string } uuid Minecraft UUID of the player
- * @param { boolean } addUuidDashes Manually add the dashes needed for the UUID to work
+ * Fetch statistics and player information from UniversoCraft given a Minecraft profile UUID. Returns a `Promise` with an `UserQuery` object with the player information, or null if it was not found.
+ * @param { string } uuid Minecraft profile UUID of the player
  * @returns { Promise<UserQuery | null> } The information on succeed, or null if the player was not found. Throws an error when the page doesn't return any data or or when the `fetch` fails
 */
-export async function queryUserByUuid(uuid: string, addUuidDashes?: boolean): Promise<UserQuery | null> {
+export async function queryUserByUuid(uuid: string): Promise<UserQuery | null> {
     const data = await (
         await fetch(`${baseURL}/jugador/${encodeURIComponent(
-            addUuidDashes ?
+            !uuid.includes("-") ?
             `${uuid.substring(0, 8)}-${uuid.substring(8, 12)}-${uuid.substring(12, 16)}-${uuid.substring(16, 20)}-${uuid.substring(20)}`
             : uuid
         )}`)
@@ -41,7 +39,14 @@ function parseQuery(data: string): UserQuery | null {
     }
 
     if (
-        data.includes("<p>¡No se ha encontrado ningún usuario con ese nombre!</p>") ||
+        data.includes("404 ERROR") ||
+        data.includes("Server Error")
+    ) {
+        throw new Error("Invalid provided arguments. URL didn't work.");
+    }
+
+    if (
+        data.includes("¡No se ha encontrado el jugador buscado!") ||
         data.includes("Este sistema mostrará tus estadísticas nuevas cada 10 minutos")
     ) return null;
 
