@@ -66,6 +66,30 @@ test("query user with tags", async () => {
     ).toBeTruthy();
 }, 15_000);
 
+test("query a helper", async () => {
+    await wait();
+    const info = await queryUserByUsername("wSilv6r");
+    const keys = Object.keys(info ?? {});
+    saveInfo(info, "wSilv6r.json");
+    return expect(
+        keys.includes("player") &&
+        keys.includes("statistics") &&
+        info?.player.tags.length
+    ).toBeTruthy();
+}, 15_000);
+
+test("query a builder", async () => {
+    await wait();
+    const info = await queryUserByUsername("4wdl");
+    const keys = Object.keys(info ?? {});
+    saveInfo(info, "4wdl.json");
+    return expect(
+        keys.includes("player") &&
+        keys.includes("statistics") &&
+        info?.player.tags.length
+    ).toBeTruthy();
+}, 15_000);
+
 test("query user with hide and seek and pinturillo statistics", async () => {
     await wait();
     const info = await queryUserByUsername("gonzaestrella");
