@@ -28,7 +28,7 @@ import { PinturilloStatistics } from "../stats/PinturilloStatistics";
 export interface Statistics {
     partyGames: PartyGamesStatistics,
     speedBuilders: SpeedBuildersStatistics,
-    teamSkywars: TeamSkyWarsStatistics,
+    teamSkyWars: TeamSkyWarsStatistics,
     buildBattle: BuildBattleStatistics,
     skyPit: SkyPitStatistics,
     tntRun: TNTRunStatistics,

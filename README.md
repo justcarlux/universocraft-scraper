@@ -43,7 +43,7 @@ Scrap almost anything from the hispanic Minecraft server [UniversoCraft's statis
         "statistics": {
             "partyGames": { ... },
             "speedBuilders": { ... },
-            "teamSkywars": { ... },
+            "teamSkyWars": { ... },
             "buildBattle": { ... },
             "skyPit": { ... },
             "tntRun": { ... },
@@ -112,7 +112,7 @@ interface Player {
 interface Statistics {
     partyGames: PartyGamesStatistics,
     speedBuilders: SpeedBuildersStatistics,
-    teamSkywars: TeamSkyWarsStatistics,
+    teamSkyWars: TeamSkyWarsStatistics,
     buildBattle: BuildBattleStatistics,
     skyPit: SkyPitStatistics,
     tntRun: TNTRunStatistics,
