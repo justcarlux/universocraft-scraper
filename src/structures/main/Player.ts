@@ -12,12 +12,12 @@ export interface Player {
     ranks: Rank[],
     /** List of player tags */
     tags: Tag[],
-    /** Date when the player last connected to the server. Equals to `null` if the date is "eternal" */
-    lastConnection: Date | null,
+    /** Date when the player last connected to the server. Equals to `null` if the date is unknown or "eternal" if the page shows that as a date */
+    lastConnection: Date | "eternal" | null,
     /** Last Minecraft version the player used to connect to the server */
-    lastVersion: string,
-    /** Date when the player first connected to the server */
-    firstConnection: Date,
+    lastVersion: string | null,
+    /** Date when the player first connected to the server. Equals to `null` if the date is unknown or "eternal" if the page shows that as a date */
+    firstConnection: Date | "eternal" | null,
     /** Player friend count */
     friends: number
 }

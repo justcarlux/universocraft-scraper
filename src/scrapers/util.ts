@@ -64,7 +64,8 @@ function getDayMonthAndYear(text: string) {
 
 export function parseLastSeenTimeString(text: string, separator: string) {
 
-    if (text.includes("Eternidad")) return null;
+    if (!text || text === "...") return null;
+    if (text.includes("Eternidad")) return "eternal";
     const [dateString, timeString] = text.split(separator);
 
     const { hours, minutes, gmt: suppliedGMT } = getHoursMinutesAndGMT(timeString.trim());

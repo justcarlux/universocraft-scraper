@@ -99,9 +99,9 @@ interface Player {
     skin: string, // Player skin texture link, grabbed from the head link
     ranks: Rank[], // List of player ranks
     tags: Tag[], // List of player tags
-    lastConnection: Date | null, // Date when the player last connected to the server. Equals to `null` if the date is "eternal"
+    lastConnection: Date | "eternal" | null, // Date when the player last connected to the server. Equals to `null` if the date is unknown or "eternal" if the page shows that as a date
     lastVersion: string, // Last Minecraft version the player used to connect to the server
-    firstConnection: Date, // Date when the player first connected to the server
+    firstConnection: Date | "eternal" | null, // Date when the player first connected to the server. Equals to `null` if the date is unknown or "eternal" if the page shows that as a date
     friends: number // Player friend count
 }
 ```

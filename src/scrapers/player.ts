@@ -41,22 +41,24 @@ export function getPlayerInfo(serialized: string[]): Player {
             }
         })
     })();
-    
-    const profileStats = filterIndexes(serialized, (e) => e.includes(`<div class="ProfileStat">`));
-    const lastVersion = serialized[
-        serialized.slice(profileStats[0]).findIndex(e => e.includes(`ProfileStat__Value`)) + profileStats[0] + 1
-    ];
-    const firstConnection = parseLastSeenTimeString(
-        serialized[
-            serialized.slice(profileStats[1]).findIndex(e => e.includes(`ProfileStat__Value`)) + profileStats[1] + 1
-        ], "-"
-    ) as Date;
-    const friends = parseInt(
-        serialized[
-            serialized.slice(profileStats[2]).findIndex(e => e.includes(`ProfileStat__Value`)) + profileStats[2] + 1
-        ]
-    );
-    
+    const profileStats = serialized.slice(
+        serialized.findIndex(e => e.includes(`<div class="ProfileStats">`))
+    )
+    const lastVersion = (() => {
+        const index = profileStats.findIndex(e => e.includes(`Última Versión`))
+        if (index < 0) return null;
+        return profileStats[index + 3];
+    })();
+    const firstConnection = (() => {
+        const index = profileStats.findIndex(e => e.includes(`Primera Conexión`))
+        if (index < 0) return null;
+        return parseLastSeenTimeString(profileStats[index + 3], "-");
+    })();
+    const friends = (() => {
+        const index = profileStats.findIndex(e => e.includes(`Amigos`))
+        if (index < 0) return 0;
+        return parseInt(profileStats[index + 3]);
+    })();
     return { username, head, skin, ranks, tags, lastConnection: lastSeen, lastVersion, firstConnection, friends };
 
 }

@@ -115,7 +115,7 @@ test("query user with capture the wool statistics", async () => {
     ).toBeTruthy();
 }, 15_000);
 
-test("query an admin w/ no last seen date", async () => {
+test("query user w/ 'eternal' last connection date", async () => {
     await wait();
     const info = await queryUserByUsername("Tauchet");
     const keys = Object.keys(info ?? {});
@@ -124,6 +124,18 @@ test("query an admin w/ no last seen date", async () => {
         keys.includes("player") &&
         keys.includes("statistics") &&
         info?.player.ranks.includes("adm") &&
+        info?.player.lastConnection === "eternal"
+    ).toBeTruthy();
+}, 15_000);
+
+test("query user without last connection date", async () => {
+    await wait();
+    const info = await queryUserByUsername("Just");
+    const keys = Object.keys(info ?? {});
+    saveInfo(info, "Just.json");
+    return expect(
+        keys.includes("player") &&
+        keys.includes("statistics") &&
         !info?.player.lastConnection
     ).toBeTruthy();
 }, 15_000);
