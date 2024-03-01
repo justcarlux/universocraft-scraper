@@ -113,4 +113,73 @@ const TopRoutes = {
     }
 }
 
-export { baseURL, TopRoutes }
+const MinigamesNames = {
+	"Party Games": "partyGames",
+	"SpeedBuilders": "speedBuilders",
+	"TeamSkyWars": "teamSkyWars",
+	"BuildBattle": "buildBattle",
+	"SkyPit": "skyPit",
+	"TNTRun": "tntRun",
+	"Pinturillo": "pinturillo",
+	"Captura la Lana": "captureTheWool",
+	"EggWars": "eggWars",
+	"Destruye el Nexus": "destroyTheNexus",
+	"MurderMystery": "murderMystery",
+	"ArenaPvP": "arenaPvP",
+	"SkyWars": "skyWars",
+	"UHC": "uhc",
+	"Juegos del Hambre": "survivalGames",
+	"TNTTag": "tntTag",
+	"SkyBlock": "skyBlock",
+	"BedWars": "bedWars",
+	"Escapa de la Bestia": "runFromTheBeast",
+	"LuckyWars": "luckyWars",
+	"Escondite": "hideAndSeek",
+	"TheBridge": "theBridge"
+}
+
+const StatNames = 
+{
+	"nivel general": "generalLevel",
+	"asesinatos": "kills",
+	"muertes": "deaths",
+	"unicoins": "unicoins",
+	"cuenta de banco": "bankAccount",
+	"gemas": "gems",
+	"tiempo jugado": "playedTime",
+	"victorias": "wins",
+	"goles": "goals",
+	"asesinatos con arco": "killsWithBow",
+	"daños al nexus": "nexusDamage",
+	"destrucciones del nexus": "nexusDestructions",
+	"bloques colocados": "placedBlocks",
+	"bloques destruidos": "brokenBlocks",
+	"menas destruidas": "brokenOres",
+	"troncos destruidos": "brokenLogs",
+	"projectiles lanzados": "launchedProjectiles",
+	"projectiles impactados": "landedProjectiles",
+	"huevos rotos": "brokenEggs",
+	"asesinatos finales": "finalKills",
+	"camas destruidas": "brokenBeds",
+	"muertes finales": "finalDeaths",
+	"partidas jugadas": "playedGames",
+	"perdidas": "losses",
+	"construcciones perfectas": "perfectBuilds",
+	"puntaje": "score",
+	"victorias totales": "totalWins",
+	"victorias como corredor": "winsAsRunner",
+	"victorias como bestia": "winsAsBeast",
+	"asesinato como corredor": "killsAsRunner",
+	"asesinato como bestia": "killsAsBeast",
+	"nivel": "level",
+	"asistencias": "assistances",
+	"distancia máxima de muerte con arco": "maximumBowKillDistance",
+	"lanas colocadas": "placedWools",
+	"palabras correctas": "correctWords",
+	"defensas": "defenses",
+	"doble lanas": "doubleWools",
+	"karma": "karma",
+	"kdr": "kdr"
+}
+
+export { baseURL, TopRoutes, MinigamesNames, StatNames }

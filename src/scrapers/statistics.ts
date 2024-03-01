@@ -1,5 +1,3 @@
-import minigames from "../resources/minigames.json";
-import statNames from "../resources/stat-names.json";
 import { Statistics } from "../structures/main/Statistics";
 import { ArenaPvPStatistics } from "../structures/stats/ArenaPvPStatistics";
 import { BedWarsStatistics } from "../structures/stats/BedWarsStatistics";
@@ -29,6 +27,7 @@ import { TheBridgeTotalStatistics } from "../structures/stats/TheBridgeTotalStat
 import { UHCStatistics } from "../structures/stats/UHCStatistics";
 import { filterIndexes } from "../utils/array-related";
 import { appropiateStatParse } from "./util";
+import { MinigamesNames, StatNames } from "../utils/constants";
 
 export function getPlayerStatistics(serialized: string[]): Statistics {
 
@@ -44,7 +43,7 @@ export function getPlayerStatistics(serialized: string[]): Statistics {
     indexes.forEach((value, index) => {
         const isMinigameTitle = index % 2 === 0;
         if (isMinigameTitle) {
-            currentGamemodeKey = minigames[serialized[value + 1] as keyof typeof minigames];
+            currentGamemodeKey = MinigamesNames[serialized[value + 1] as keyof typeof MinigamesNames];
             return;
         }
 
@@ -82,7 +81,7 @@ export function getPlayerStatistics(serialized: string[]): Statistics {
                 });
                 currentStatKey = "";
             } else {
-                currentStatKey = statNames[data.toLowerCase() as keyof typeof statNames];
+                currentStatKey = StatNames[data.toLowerCase() as keyof typeof StatNames];
             }
         }
     });

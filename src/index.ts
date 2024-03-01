@@ -36,7 +36,7 @@ import { TNTRunStatistics } from "./structures/stats/TNTRunStatistics";
 import { TNTTagStatistics } from "./structures/stats/TNTTagStatistics";
 import { UHCStatistics } from "./structures/stats/UHCStatistics";
 
-import { TopRoutes } from "./utils/constants";
+import { TopRoutes, MinigamesNames, StatNames } from "./utils/constants";
 
 export {
     queryUserByUsername,
@@ -74,5 +74,7 @@ export {
     TNTRunStatistics,
     TNTTagStatistics,
     UHCStatistics,
-    TopRoutes
+    TopRoutes,
+    MinigamesNames,
+    StatNames
 }
