@@ -90,7 +90,7 @@ export function getPlayerStatistics(serialized: string[]): Statistics {
     return {
         partyGames: new PartyGamesStatistics(raw.get("partyGames")),
         speedBuilders: new SpeedBuildersStatistics(raw.get("speedBuilders")),
-        teamSkywars: new TeamSkyWarsStatistics(raw.get("teamSkywars")),
+        teamSkywars: new TeamSkyWarsStatistics(raw.get("teamSkyWars")),
         buildBattle: new BuildBattleStatistics(raw.get("buildBattle")),
         skyPit: new SkyPitStatistics(raw.get("skyPit")),
         tntRun: new TNTRunStatistics(raw.get("tntRun")),
