@@ -1,0 +1,44 @@
+{
+    "name": "universocraft-scraper",
+    "version": "1.1.16",
+    "description": "Scrap almost anything from the hispanic Minecraft server UniversoCraft's statistics page with a good API.",
+    "main": "lib/index.js",
+    "types": "lib/index.d.ts",
+    "files": [
+        "lib/**/*"
+    ],
+    "devDependencies": {
+        "@types/jest": "^29.5.4",
+        "@types/node": "^20.5.9",
+        "jest": "^29.6.4",
+        "prettier": "^3.5.3",
+        "ts-jest": "^29.1.1",
+        "typescript": "^5.2.2"
+    },
+    "repository": {
+        "type": "git",
+        "url": "git+https://github.com/justcarlux/universocraft-scraper.git"
+    },
+    "scripts": {
+        "build": "tsc",
+        "test": "jest --config jestconfig.json",
+        "prettier": "prettier . --write"
+    },
+    "keywords": [
+        "universocraft",
+        "api",
+        "statistics",
+        "scraper"
+    ],
+    "author": "justcarlux",
+    "license": "ISC",
+    "bugs": {
+        "url": "https://github.com/justcarlux/universocraft-scraper/issues"
+    },
+    "homepage": "https://github.com/justcarlux/universocraft-scraper#readme",
+    "dependencies": {
+        "axios": "^1.8.4",
+        "dotenv": "^16.5.0",
+        "https-proxy-agent": "^7.0.6"
+    }
+}
