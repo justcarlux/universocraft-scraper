@@ -154,7 +154,7 @@ interface Statistics {
 fetchTop(route: string, page?: number): Promise<TopEntry[]>
 ```
 
-Fetch top entries given a route from UniversoCraft.
+Fetch top entries given a route from UniversoCraft. `head` and `skin` URLs are only available for the top 5 due to how the top page was made.
 
 - route (`string`): Page route where to fetch top entries from. It's recommended/intented to use the exported constant `TopRoutes` to find a route to fetch from. Either way, you can pass one manually.
 - page (optional, `number`): Top page number, must be between 1 and 20. Defaults to **1**.

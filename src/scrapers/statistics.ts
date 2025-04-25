@@ -6,7 +6,6 @@ import { CaptureTheWoolStatistics } from "../structures/stats/CaptureTheWoolStat
 import { DestroyTheNexusStatistics } from "../structures/stats/DestroyTheNexusStatistics";
 import { EggWarsStatistics } from "../structures/stats/EggWarsStatistics";
 import { HideAndSeekStatistics } from "../structures/stats/HideAndSeekStatistics";
-import { SurvivalGamesStatistics } from "../structures/stats/SurvivalGamesStatistics";
 import { LuckyWarsStatistics } from "../structures/stats/LuckyWarsStatistics";
 import { MurderMysteryStatistics } from "../structures/stats/MurderMysteryStatistics";
 import { PartyGamesStatistics } from "../structures/stats/PartyGamesStatistics";
@@ -16,6 +15,7 @@ import { SkyBlockStatistics } from "../structures/stats/SkyBlockStatistics";
 import { SkyPitStatistics } from "../structures/stats/SkyPitStatistics";
 import { SkyWarsStatistics } from "../structures/stats/SkyWarsStatistics";
 import { SpeedBuildersStatistics } from "../structures/stats/SpeedBuildersStatistics";
+import { SurvivalGamesStatistics } from "../structures/stats/SurvivalGamesStatistics";
 import { TNTRunStatistics } from "../structures/stats/TNTRunStatistics";
 import { TNTTagStatistics } from "../structures/stats/TNTTagStatistics";
 import { TeamSkyWarsStatistics } from "../structures/stats/TeamSkyWarsStatistics";
@@ -24,11 +24,13 @@ import { TheBridgeLegacyStatistics } from "../structures/stats/TheBridgeLegacySt
 import { TheBridgeSoloStatistics } from "../structures/stats/TheBridgeSoloStatistics";
 import { TheBridgeThreesStatistics } from "../structures/stats/TheBridgeThreesStatistics";
 import { TheBridgeTotalStatistics } from "../structures/stats/TheBridgeTotalStatistics";
+import { TurfWarsStatistics } from "../structures/stats/TurfWarsStatistics";
 import { UHCStatistics } from "../structures/stats/UHCStatistics";
 import { filterIndexes } from "../utils/array-related";
-import { appropiateStatParse } from "./util";
 import { MinigamesNames, StatNames } from "../utils/constants";
-import { TurfWarsStatistics } from "../structures/stats/TurfWarsStatistics";
+import { appropiateStatParse } from "./util";
+
+export const MAX_ITERATIONS = 250;
 
 export function getPlayerStatistics(serialized: string[]): Statistics {
     const indexes = filterIndexes(serialized, e => {
@@ -50,7 +52,19 @@ export function getPlayerStatistics(serialized: string[]): Statistics {
             return;
         }
 
+        let iterations = 0;
         while (true) {
+            iterations++;
+            if (iterations > MAX_ITERATIONS) {
+                throw new Error(
+                    `Reached maximum iterations (${MAX_ITERATIONS}) while parsing the statistics page`,
+                    {
+                        cause: {
+                            currentGamemodeKey
+                        }
+                    }
+                );
+            }
             value++;
             const data = serialized[value];
 

@@ -9,7 +9,7 @@ export function parseSkinData(text: string) {
         try {
             return new URL(head as string).searchParams.get("url");
         } catch (err) {}
-        return "";
+        return null;
     })();
     return { head, skin };
 }

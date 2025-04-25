@@ -8,9 +8,7 @@ export function setGlobalProxy(proxy: HttpsProxyAgent<string> | undefined | null
     currentProxy = proxy ?? undefined;
 }
 
-const client = axios.create({
-    baseURL
-});
+const client = axios.create({ baseURL });
 export async function proxiedRequest(endpoint: string) {
     const response = await client.get(endpoint, {
         proxy: false,
